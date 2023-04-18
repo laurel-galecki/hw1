@@ -185,6 +185,22 @@ VALUES
   ("The Dark Knight Rises", 2012,"PG-13")
 ;
 
+INSERT INTO characters (
+  character_name
+)
+
+VALUES 
+  ("Bruce Wayne"),
+  ("Alfred"),
+  ("Ra's Al Ghul"),
+  ("Rachel Dawes"),
+  ("Commissioner Gordon"),
+  ("Joker"),
+  ("Harvey Dent"),
+  ("Bane"),
+  ("John Blake"),
+  ("Selina Kyle")
+;
 
 -- Prints a header for the movies output
 .print "Movies"
