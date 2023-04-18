@@ -110,9 +110,8 @@
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
-DROP TABLE IF EXISTS activities;
-DROP TABLE IF EXISTS industries;
-DROP TABLE IF EXISTS industry_memberships;
+DROP TABLE IF EXISTS characters;
+
 
 -- Create new tables, according to your domain model
 -- TODO!
@@ -148,6 +147,45 @@ CREATE TABLE movies (
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
 
+INSERT INTO studios (
+  studio_name
+)
+VALUES (
+  "Warner Bros"
+);
+
+INSERT INTO actors (
+  first_name,
+  last_name
+)
+
+VALUES 
+  ("Christian", "Bale"),
+  ("Michael", "Caine"),
+  ("Liam", "Neeson"),
+  ("Katie", "Holmes"),
+  ("Gary", "Oldman"),
+  ("Heath", "Ledger"),
+  ("Aaron", "Eckhart"),
+  ("Maggie", "Gyllenhaal"),
+  ("Tom", "Hardy"),
+  ("Joseph", "Gordon-Levitt"),
+  ("Anne", "Hathaway")
+;
+
+INSERT INTO movies (
+  title,
+  year_released,
+  mpaa_rating
+)
+
+VALUES 
+  ("Batman Begins", 2005,"PG-13"),
+  ("The Dark Knight", 2008,"PG-13"),
+  ("The Dark Knight Rises", 2012,"PG-13")
+;
+
+
 -- Prints a header for the movies output
 .print "Movies"
 .print "======"
@@ -155,6 +193,10 @@ CREATE TABLE movies (
 
 -- The SQL statement for the movies output
 -- TODO!
+
+SELECT movies.studio_id, studios.id
+FROM movies, studios
+WHERE movies.studio_id = studios.id;
 
 -- Prints a header for the cast output
 .print ""
