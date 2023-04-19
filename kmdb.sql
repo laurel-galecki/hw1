@@ -129,7 +129,7 @@ DROP TABLE IF EXISTS movie_roles;
 CREATE TABLE movie_roles (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   character_name TEXT,
-  actor_id INTEGER,
+  actor_name TEXT,
   movie_id INTEGER
 );
 
