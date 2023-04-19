@@ -116,12 +116,6 @@ CREATE TABLE studios (
   studio_name TEXT
 );
 
-DROP TABLE IF EXISTS actors;
-CREATE TABLE actors (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  full_name TEXT
-);
-
 DROP TABLE IF EXISTS movies;
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -150,24 +144,6 @@ VALUES (
   "Warner Bros."
 );
 
-INSERT INTO actors (
-  full_name
-)
-
-VALUES 
-  ("Christian Bale"),
-  ("Michael Caine"),
-  ("Liam Neeson"),
-  ("Katie Holmes"),
-  ("Gary Oldman"),
-  ("Heath Ledger"),
-  ("Aaron Eckhart"),
-  ("Maggie Gyllenhaal"),
-  ("Tom Hardy"),
-  ("Joseph Gordon-Levitt"),
-  ("Anne Hathaway")
-;
-
 INSERT INTO movies (
   title,
   year_released,
@@ -183,26 +159,26 @@ VALUES
 
 INSERT INTO movie_roles (
   character_name,
-  actor_id,
+  actor_name,
   movie_id
 )
 
 VALUES 
-  ("Bruce Wayne",1,1),
-  ("Alfred",2,1),
-  ("Ra's Al Ghul",3,1),
-  ("Rachel Dawes",4,1),
-  ("Commissioner Gordon",5,1),
-  ("Bruce Wayne",1,2)
-  ("Joker",6,2),
-  ("Harvey Dent",7,2),
-  ("Alfred",2,2)
-  ("Rachel Dawes",8,2)
-  ("Bruce Wayne",1,3)
-  ("Commissioner Gordon",5,3)
-  ("Bane",9,3),
-  ("John Blake",10,3),
-  ("Selina Kyle",11,3)
+  ("Bruce Wayne","Christian Bale",1),
+  ("Alfred","Michael Caine",1),
+  ("Ra's Al Ghul","Liam Neeson",1),
+  ("Rachel Dawes","Katie Holmes",1),
+  ("Commissioner Gordon","Gary Oldman",1),
+  ("Bruce Wayne","Christian Bale",2)
+  ("Joker","Heath Ledger",2),
+  ("Harvey Dent",7"Aaron Eckhart",2),
+  ("Alfred","Michael Caine",2)
+  ("Rachel Dawes","Maggie Gyllenhaal",2)
+  ("Bruce Wayne","Christian Bale",3)
+  ("Commissioner Gordon","Gary Oldman",3)
+  ("Bane","Tom Hardy",3),
+  ("John Blake","Joseph Gordon-Levitt",3),
+  ("Selina Kyle","Anne Hathaway",3)
 ;
 
 -- Prints a header for the movies output
@@ -227,7 +203,7 @@ from movies inner join studios on movies.studio_id = studios.id
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT movies.title, actors.full_name
-FROM movies
-inner join movie_roles on movie_roles.actor_id = actors.id
+SELECT movies.title, movie_roles.actor_name, movie_roles.character_name
+FROM movie_roles
+inner join movies on movies.id = movie_roles.movie_id
 ;
