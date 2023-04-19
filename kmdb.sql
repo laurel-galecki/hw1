@@ -110,7 +110,6 @@
 DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
-DROP TABLE IF EXISTS characters;
 DROP TABLE IF EXISTS movie_roles;
 
 
@@ -128,26 +127,19 @@ CREATE TABLE actors (
   last_name TEXT
 );
 
-CREATE TABLE characters (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  character_name TEXT
-);
-
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   year_released INTEGER,
   mpaa_rating TEXT,
-  studio TEXT,
-  character_id INTEGER,
-  actor_id INTEGER
+  studio_id INTEGER
 );
 
 CREATE TABLE movie_roles (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  movie TEXT
   character_name TEXT,
-  portrayed_by TEXT,
+  actor_id INTEGER,
+  movie_id INTEGER
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -158,7 +150,7 @@ INSERT INTO studios (
   studio_name
 )
 VALUES (
-  "Warner Bros"
+  "Warner Bros."
 );
 
 INSERT INTO actors (
@@ -183,17 +175,16 @@ VALUES
 INSERT INTO movies (
   title,
   year_released,
-  mpaa_rating,
-  studio
+  mpaa_rating
 )
 
 VALUES 
-  ("Batman Begins", 2005,"PG-13","Warner Bros."),
-  ("The Dark Knight", 2008,"PG-13","Warner Bros."),
-  ("The Dark Knight Rises", 2012,"PG-13","Warner Bros.")
+  ("Batman Begins", 2005,"PG-13"),
+  ("The Dark Knight", 2008,"PG-13"),
+  ("The Dark Knight Rises", 2012,"PG-13")
 ;
 
-INSERT INTO characters (
+INSERT INTO movie_roles (
   character_name
 )
 
@@ -202,25 +193,6 @@ VALUES
   ("Alfred"),
   ("Ra's Al Ghul"),
   ("Rachel Dawes"),
-  ("Commissioner Gordon"),
-  ("Joker"),
-  ("Harvey Dent"),
-  ("Bane"),
-  ("John Blake"),
-  ("Selina Kyle")
-;
-
-INSERT INTO movie_roles (
-  movie,
-  character_name,
-  portrayed_by
-)
-
-VALUES 
-  ("Batman Begins","Bruce Wayne","Christian Bale"),
-  ("Batman Begins","Alfred","Michael Caine"),
-  ("Batman Begins","Ra's Al Ghul","Liam Neeson"),
-  ("Batman Begins","Rachel Dawes","Katie Holmes"),
   ("Commissioner Gordon"),
   ("Joker"),
   ("Harvey Dent"),
