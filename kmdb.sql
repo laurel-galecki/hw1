@@ -107,25 +107,22 @@
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
 
-DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS studios;
-DROP TABLE IF EXISTS actors;
-DROP TABLE IF EXISTS movie_roles;
-
-
 -- Create new tables, according to your domain model
 -- TODO!
 
+DROP TABLE IF EXISTS studios;
 CREATE TABLE studios (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   studio_name TEXT
 );
 
+DROP TABLE IF EXISTS actors;
 CREATE TABLE actors (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   full_name TEXT
 );
 
+DROP TABLE IF EXISTS movies;
 CREATE TABLE movies (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
@@ -134,6 +131,7 @@ CREATE TABLE movies (
   studio_id INTEGER
 );
 
+DROP TABLE IF EXISTS movie_roles;
 CREATE TABLE movie_roles (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   character_name TEXT,
@@ -173,30 +171,38 @@ VALUES
 INSERT INTO movies (
   title,
   year_released,
-  mpaa_rating
+  mpaa_rating,
+  studio_id
 )
 
 VALUES 
-  ("Batman Begins", 2005,"PG-13"),
-  ("The Dark Knight", 2008,"PG-13"),
-  ("The Dark Knight Rises", 2012,"PG-13")
+  ("Batman Begins", 2005,"PG-13",1),
+  ("The Dark Knight", 2008,"PG-13",1),
+  ("The Dark Knight Rises", 2012,"PG-13",1)
 ;
 
 INSERT INTO movie_roles (
-  character_name
+  character_name,
+  actor_id,
+  movie_id
 )
 
 VALUES 
-  ("Bruce Wayne"),
-  ("Alfred"),
-  ("Ra's Al Ghul"),
-  ("Rachel Dawes"),
-  ("Commissioner Gordon"),
-  ("Joker"),
-  ("Harvey Dent"),
-  ("Bane"),
-  ("John Blake"),
-  ("Selina Kyle")
+  ("Bruce Wayne",1,1),
+  ("Alfred",2,1),
+  ("Ra's Al Ghul",3,1),
+  ("Rachel Dawes",4,1),
+  ("Commissioner Gordon",5,1),
+  ("Bruce Wayne",1,2)
+  ("Joker",6,2),
+  ("Harvey Dent",7,2),
+  ("Alfred",2,2)
+  ("Rachel Dawes",8,2)
+  ("Bruce Wayne",1,3)
+  ("Commissioner Gordon",5,3)
+  ("Bane",9,3),
+  ("John Blake",10,3),
+  ("Selina Kyle",11,3)
 ;
 
 -- Prints a header for the movies output
@@ -208,8 +214,7 @@ VALUES
 -- TODO!
 
 SELECT movies.title, movies.year_released, movies.mpaa_rating, studios.studio_name
-from movies, studios inner join studios on movies.studio_id = studios.id
-order by movies.title
+from movies inner join studios on movies.studio_id = studios.id
 ;
 
 -- Prints a header for the cast output
@@ -222,6 +227,7 @@ order by movies.title
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT movies.title, actors.full_name, movie_roles.character_name
-FROM movies, actors inner join movie_roles on actors.id = movie_roles.actor_id
+SELECT movies.title, actors.full_name
+FROM movies
+inner join movie_roles on movie_roles.actor_id = actors.id
 ;
