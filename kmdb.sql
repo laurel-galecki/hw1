@@ -111,6 +111,7 @@ DROP TABLE IF EXISTS movies;
 DROP TABLE IF EXISTS studios;
 DROP TABLE IF EXISTS actors;
 DROP TABLE IF EXISTS characters;
+DROP TABLE IF EXISTS movie_roles;
 
 
 -- Create new tables, according to your domain model
@@ -129,9 +130,7 @@ CREATE TABLE actors (
 
 CREATE TABLE characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  character_name TEXT,
-  portrayed_by TEXT,
-  movie_id INTEGER
+  character_name TEXT
 );
 
 CREATE TABLE movies (
@@ -141,7 +140,14 @@ CREATE TABLE movies (
   mpaa_rating TEXT,
   studio TEXT,
   character_id INTEGER,
-  actor_id
+  actor_id INTEGER
+);
+
+CREATE TABLE movie_roles (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  movie TEXT
+  character_name TEXT,
+  portrayed_by TEXT,
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -188,16 +194,33 @@ VALUES
 ;
 
 INSERT INTO characters (
-  character_name,
-  portrayed_by,
-  movie
+  character_name
 )
 
 VALUES 
-  ("Bruce Wayne","Christian Bale",),
+  ("Bruce Wayne"),
   ("Alfred"),
   ("Ra's Al Ghul"),
   ("Rachel Dawes"),
+  ("Commissioner Gordon"),
+  ("Joker"),
+  ("Harvey Dent"),
+  ("Bane"),
+  ("John Blake"),
+  ("Selina Kyle")
+;
+
+INSERT INTO movie_roles (
+  movie,
+  character_name,
+  portrayed_by
+)
+
+VALUES 
+  ("Batman Begins","Bruce Wayne","Christian Bale"),
+  ("Batman Begins","Alfred","Michael Caine"),
+  ("Batman Begins","Ra's Al Ghul","Liam Neeson"),
+  ("Batman Begins","Rachel Dawes","Katie Holmes"),
   ("Commissioner Gordon"),
   ("Joker"),
   ("Harvey Dent"),
