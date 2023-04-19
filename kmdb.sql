@@ -157,7 +157,7 @@ VALUES
   ("The Dark Knight Rises", 2012,"PG-13",1)
 ;
 
-INSERT INTO movie_roles (
+Insert into movie_roles (
   character_name,
   actor_name,
   movie_id
@@ -171,7 +171,7 @@ VALUES
   ("Commissioner Gordon","Gary Oldman",1),
   ("Bruce Wayne","Christian Bale",2)
   ("Joker","Heath Ledger",2),
-  ("Harvey Dent",7"Aaron Eckhart",2),
+  ("Harvey Dent","Aaron Eckhart",2),
   ("Alfred","Michael Caine",2)
   ("Rachel Dawes","Maggie Gyllenhaal",2)
   ("Bruce Wayne","Christian Bale",3)
@@ -203,7 +203,6 @@ from movies inner join studios on movies.studio_id = studios.id
 -- The SQL statement for the cast output
 -- TODO!
 
-SELECT movies.title, movie_roles.actor_name, movie_roles.character_name
+SELECT actor_name, character_name
 FROM movie_roles
-inner join movies on movies.id = movie_roles.movie_id
 ;
