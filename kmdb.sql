@@ -130,9 +130,8 @@ CREATE TABLE actors (
 CREATE TABLE characters (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   character_name TEXT,
-  actor_id INTEGER,
-  movie_id INTEGER,
-  studio_id INTEGER
+  portrayed_by TEXT,
+  movie_id INTEGER
 );
 
 CREATE TABLE movies (
@@ -140,7 +139,9 @@ CREATE TABLE movies (
   title TEXT,
   year_released INTEGER,
   mpaa_rating TEXT,
-  studio_id INTEGER
+  studio TEXT,
+  character_id INTEGER,
+  actor_id
 );
 
 -- Insert data into your database that reflects the sample data shown above
@@ -176,21 +177,24 @@ VALUES
 INSERT INTO movies (
   title,
   year_released,
-  mpaa_rating
+  mpaa_rating,
+  studio
 )
 
 VALUES 
-  ("Batman Begins", 2005,"PG-13"),
-  ("The Dark Knight", 2008,"PG-13"),
-  ("The Dark Knight Rises", 2012,"PG-13")
+  ("Batman Begins", 2005,"PG-13","Warner Bros."),
+  ("The Dark Knight", 2008,"PG-13","Warner Bros."),
+  ("The Dark Knight Rises", 2012,"PG-13","Warner Bros.")
 ;
 
 INSERT INTO characters (
-  character_name
+  character_name,
+  portrayed_by,
+  movie
 )
 
 VALUES 
-  ("Bruce Wayne"),
+  ("Bruce Wayne","Christian Bale",),
   ("Alfred"),
   ("Ra's Al Ghul"),
   ("Rachel Dawes"),
@@ -210,9 +214,10 @@ VALUES
 -- The SQL statement for the movies output
 -- TODO!
 
-SELECT movies.studio_id, studios.id
-FROM movies, studios
-WHERE movies.studio_id = studios.id;
+SELECT movies.title, movies.year_released, movies.mpaa_rating
+from movies inner join studios on movies.studio_id = studios.id
+order by movies.title
+;
 
 -- Prints a header for the cast output
 .print ""
